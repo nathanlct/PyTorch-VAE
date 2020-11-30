@@ -19,7 +19,7 @@ class CoinrunDataset(data.Dataset):
             self.transform = lambda x: x
 
     def __getitem__(self, index):
-        return self.transform(self.data[index])
+        return self.transform(self.data[index]), None
 
     def __len__(self):
         return self.data.shape[0]
