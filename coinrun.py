@@ -18,6 +18,11 @@ class CoinrunDataset(data.Dataset):
         self.transform = transform
         if not self.transform:
             self.transform = lambda x: x
+        
+        print('Initialized dataset')
+        print(filepath, split, self.data.shape)
+        print('------')
+        
 
     def __getitem__(self, index):
         return self.transform(self.data[index])
