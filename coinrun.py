@@ -19,13 +19,10 @@ class CoinrunDataset(data.Dataset):
         if not self.transform:
             self.transform = lambda x: x
         
-        print('Initialized dataset')
-        print(filepath, split, self.data.shape)
-        print('------')
-        
+        print(f'Initialized dataset {split} from {filepath}, with shape {self.data.shape}')
 
     def __getitem__(self, index):
-        return self.transform(self.data[index])
+        return self.transform(self.data[index]), None
 
     def __len__(self):
         return self.data.shape[0]
