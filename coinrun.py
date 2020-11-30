@@ -6,6 +6,7 @@ class CoinrunDataset(data.Dataset):
     def __init__(self, filepath, split='train', transform=None):
         x = np.load(filepath)['obs']  # (400, 32, 64, 64, 3)
         self.data = x.reshape(-1, *x.shape[2:])  # (12800, 64, 64, 3)
+        np.seed(0)
         np.random.shuffle(self.data)
         N = self.data.shape[0]
         if split == 'train':
@@ -19,7 +20,7 @@ class CoinrunDataset(data.Dataset):
             self.transform = lambda x: x
 
     def __getitem__(self, index):
-        return self.transform(self.data[index]), None
+        return self.transform(self.data[index])
 
     def __len__(self):
         return self.data.shape[0]
