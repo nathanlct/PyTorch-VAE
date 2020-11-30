@@ -9,6 +9,7 @@ from torchvision import transforms
 import torchvision.utils as vutils
 from torchvision.datasets import CelebA
 from torch.utils.data import DataLoader
+from coinrun import CoinrunDataset
 
 
 class VAEXperiment(pl.LightningModule):
@@ -141,6 +142,10 @@ class VAEXperiment(pl.LightningModule):
                              split = "train",
                              transform=transform,
                              download=False)
+        elif self.params['dataset'] == 'coinrun':
+            dataset = CoinrunDataset(filepath=self.params['data_path'],
+                                     split='train',
+                                     transform=transform)
         else:
             raise ValueError('Undefined dataset type')
 
@@ -163,6 +168,14 @@ class VAEXperiment(pl.LightningModule):
                                                  shuffle = True,
                                                  drop_last=True)
             self.num_val_imgs = len(self.sample_dataloader)
+        elif self.params['dataset'] == 'coinrun':
+            self.sample_dataloader =  DataLoader(CoinrunDataset(filepath=self.params['data_path'],
+                                                                split='test',
+                                                                transform=transform),
+                                                 batch_size= 144,
+                                                 shuffle = True,
+                                                 drop_last=True)
+            self.num_val_imgs = len(self.sample_dataloader)
         else:
             raise ValueError('Undefined dataset type')
 
@@ -179,6 +192,9 @@ class VAEXperiment(pl.LightningModule):
                                             transforms.Resize(self.params['img_size']),
                                             transforms.ToTensor(),
                                             SetRange])
+        elif self.params['dataset'] == 'coinrun':
+            transform = transforms.Compose([transforms.ToTensor(),
+                                            transforms.Lambda(lambda X: 2. * X - 1.)])
         else:
             raise ValueError('Undefined dataset type')
         return transform
