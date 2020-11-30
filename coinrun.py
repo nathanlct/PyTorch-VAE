@@ -6,7 +6,7 @@ class CoinrunDataset(data.Dataset):
     def __init__(self, filepath, split='train', transform=None):
         x = np.load(filepath)['obs']  # (400, 32, 64, 64, 3)
         self.data = x.reshape(-1, *x.shape[2:])  # (12800, 64, 64, 3)
-        np.seed(0)
+        np.random.seed(0)
         np.random.shuffle(self.data)
         N = self.data.shape[0]
         if split == 'train':
