@@ -19,7 +19,7 @@ class VAEXperiment(pl.LightningModule):
                  params: dict) -> None:
         super(VAEXperiment, self).__init__()
 
-        self.model = vae_model
+        self.model = vae_model.cuda()
         self.params = params
         self.curr_device = None
         self.hold_graph = False
