@@ -22,7 +22,7 @@ class CoinrunDataset(data.Dataset):
         print(f'Initialized dataset {split} from {filepath} with shape {self.data.shape}')
 
     def __getitem__(self, index):
-        return self.transform(self.data[index]), None
+        return self.transform(self.data[index])
 
     def __len__(self):
         return self.data.shape[0]
