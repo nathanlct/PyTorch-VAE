@@ -58,7 +58,7 @@ runner = Trainer(default_save_path=f"{tt_logger.save_dir}",
                  val_percent_check=1.,
                  num_sanity_val_steps=5,
                  early_stop_callback = False,
-                 callbacks=[checkpoint_callback],
+                 checkpoint_callback=checkpoint_callback,
                  **config['trainer_params'])
 
 print(f"======= Training {config['model_params']['name']} =======")
