@@ -45,8 +45,7 @@ experiment = VAEXperiment(model,
 from pytorch_lightning.callbacks import ModelCheckpoint
 
 checkpoint_callback = ModelCheckpoint(
-    dirpath=config['logging_params']['save_dir_cp'],
-    filename='{epoch}-{val_loss:.2f}',
+    filepath=config['logging_params']['save_dir_cp'] + '{epoch}-{val_loss:.2f}',
     verbose=True,
     save_top_k=-1,
     period=3)
