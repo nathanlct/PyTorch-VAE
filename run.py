@@ -41,6 +41,16 @@ model = vae_models[config['model_params']['name']](**config['model_params'])
 experiment = VAEXperiment(model,
                           config['exp_params'])
 
+
+from pytorch_lightning.callbacks import ModelCheckpoint
+
+checkpoint_callback = ModelCheckpoint(
+    dirpath=config['logging_params']['save_dir_cp'],
+    filename='{epoch}-{val_loss:.2f}',
+    verbose=True,
+    save_top_k=-1,
+    period=3)
+
 runner = Trainer(default_save_path=f"{tt_logger.save_dir}",
                  min_nb_epochs=1,
                  logger=tt_logger,
@@ -49,6 +59,7 @@ runner = Trainer(default_save_path=f"{tt_logger.save_dir}",
                  val_percent_check=1.,
                  num_sanity_val_steps=5,
                  early_stop_callback = False,
+                 callbacks=[checkpoint_callback],
                  **config['trainer_params'])
 
 print(f"======= Training {config['model_params']['name']} =======")
