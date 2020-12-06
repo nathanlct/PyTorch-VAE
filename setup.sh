@@ -13,5 +13,9 @@ python run.py -c configs/bhvae.yaml
 # new
 
 conda create --name vae python=3.7 -y
+conda activate vae
 conda install nb_conda -y
 conda install pytorch-lightning -c conda-forge -y
+pip install torchvision
+pip install torchnet
+pip install torchsummary
