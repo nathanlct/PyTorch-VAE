@@ -129,7 +129,7 @@ class VAEXperiment(pl.LightningModule):
                           shuffle=True,
                           drop_last=True,
                           num_workers=4,
-                          pin_memory=True))
+                          pin_memory=True)
 
     @data_loader
     def val_dataloader(self):
