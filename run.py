@@ -49,7 +49,14 @@ checkpoint_callback = ModelCheckpoint(
     save_top_k=-1,
     period=5)
 
-runner = Trainer() #**config['trainer_params'])
+# https://pytorch-lightning.readthedocs.io/en/stable/trainer.html
+runner = Trainer(
+    gpus=1,
+    default_root_dir=config['logging_params']['save_dir'],  # could be S3 path
+    max_epochs=100,
+    # resume_from_checkpoint='some/path/to/my_checkpoint.ckpt',
+    num_sanity_val_steps=2,
+) #**config['trainer_params'])
 
 # default_save_path=config['logging_params']['save_dir'],
 # min_nb_epochs=1,

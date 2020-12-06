@@ -16,7 +16,7 @@ class VAEXperiment(pl.LightningModule):
 
     def __init__(self, vae_model: BaseVAE, params: dict) -> None:
         super().__init__()
-        self.model = vae_model
+        self.model = vae_model.cuda()
         self.params = params
         self.curr_device = None
         self.hold_graph = self.params.get('retain_first_backpass', False)
@@ -125,9 +125,11 @@ class VAEXperiment(pl.LightningModule):
 
         self.num_train_imgs = len(dataset)
         return DataLoader(dataset,
-                          batch_size= self.params['batch_size'],
-                          shuffle = True,
-                          drop_last=True)
+                          batch_size=self.params['batch_size'],
+                          shuffle=True,
+                          drop_last=True,
+                          num_workers=4,
+                          pin_memory=True))
 
     @data_loader
     def val_dataloader(self):
@@ -139,7 +141,9 @@ class VAEXperiment(pl.LightningModule):
                                                                 transform=transform),
                                                  batch_size= 144,
                                                  shuffle = True,
-                                                 drop_last=True)
+                                                 drop_last=True,
+                                                num_workers=4,
+                                                pin_memory=True)
             self.num_val_imgs = len(self.sample_dataloader)
         else:
             raise ValueError('Undefined dataset type')
