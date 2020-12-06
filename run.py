@@ -49,7 +49,7 @@ checkpoint_callback = ModelCheckpoint(
     save_top_k=-1,
     period=5)
 
-runner = Trainer(default_save_path=config['logging_params']['save_dir'],
+runner = Trainer(#default_save_path=config['logging_params']['save_dir'],
                  min_nb_epochs=1,
                 #  logger=tt_logger,
                  log_save_interval=5,
