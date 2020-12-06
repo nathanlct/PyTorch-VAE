@@ -10,3 +10,5 @@ __pycache__/
 Run.ipynb
 
 .DS_STORE
+
+events*

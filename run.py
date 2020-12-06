@@ -49,16 +49,18 @@ checkpoint_callback = ModelCheckpoint(
     save_top_k=-1,
     period=5)
 
-runner = Trainer(#default_save_path=config['logging_params']['save_dir'],
-                 min_nb_epochs=1,
-                #  logger=tt_logger,
-                 log_save_interval=5,
-                 train_percent_check=1.,
-                 val_percent_check=1.,
-                 num_sanity_val_steps=5,
-                 early_stop_callback = False,
-                 checkpoint_callback=checkpoint_callback,
-                 **config['trainer_params'])
+runner = Trainer() #**config['trainer_params'])
+
+# default_save_path=config['logging_params']['save_dir'],
+# min_nb_epochs=1,
+# logger=tt_logger,
+# log_save_interval=5,
+# train_percent_check=1.,
+# val_percent_check=1.,
+# num_sanity_val_steps=5,
+# early_stop_callback = False,
+# checkpoint_callback=checkpoint_callback,
+# **config['trainer_params'])
 
 print(f"======= Training {config['model_params']['name']} =======")
 runner.fit(experiment)
