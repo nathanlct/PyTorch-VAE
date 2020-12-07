@@ -16,7 +16,7 @@ class VAEXperiment(pl.LightningModule):
 
     def __init__(self, vae_model: BaseVAE, params: dict) -> None:
         super().__init__()
-        self.model = vae_model.cuda()
+        self.model = vae_model
         self.params = params
         self.curr_device = None
         self.hold_graph = self.params.get('retain_first_backpass', False)
@@ -140,7 +140,7 @@ class VAEXperiment(pl.LightningModule):
                                                                 split='test',
                                                                 transform=transform),
                                                  batch_size= 144,
-                                                 shuffle = True,
+                                                 shuffle=False,
                                                  drop_last=True,
                                                 num_workers=4,
                                                 pin_memory=True)
