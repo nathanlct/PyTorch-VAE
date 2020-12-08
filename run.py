@@ -1,7 +1,7 @@
 import yaml
 import argparse
 import numpy as np
-from datetime import datet
+from datetime import datetime
 import os.path
 
 from models import *
