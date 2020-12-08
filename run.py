@@ -44,7 +44,7 @@ experiment = VAEXperiment(model, config['exp_params'])
 
 # create trainer (https://pytorch-lightning.readthedocs.io/en/stable/trainer.html)
 now = datetime.now().strftime("%d%b%Y-%Hh%Mm%Ss")
-save_dir = config['logging_params']['save_dir'].replace('{date}', now)
+save_dir = config['logging_params']['save_dir'].replace("{date}", now)
 runner = Trainer(
     default_root_dir=save_dir, 
     callbacks=[MyPrintingCallback()],
