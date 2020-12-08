@@ -19,6 +19,6 @@ trainer_params:
   max_epochs: 10 # 200
 
 logging_params:
-  save_dir: "s3://nathan.experiments/adversarial/vae/" #{date}/"
+  save_dir: "./logs/{time}/"
   name: "BetaVAE_H"
   manual_seed: 1265
