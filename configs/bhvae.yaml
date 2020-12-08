@@ -16,9 +16,9 @@ exp_params:
 
 trainer_params:
   gpus: 1
-  max_epochs: 10 # 200
+  max_epochs: 200
 
 logging_params:
-  save_dir: "./logs/{time}/"
+  save_dir: "./logs/"
   name: "BetaVAE_H"
   manual_seed: 1265
