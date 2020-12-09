@@ -11,7 +11,7 @@ from torchvision.datasets import CelebA
 from torch.utils.data import DataLoader
 from coinrun import CoinrunDataset
 
-
+# https://pytorch-lightning.readthedocs.io/en/latest/lightning_module.html
 class VAEXperiment(pl.LightningModule):
 
     def __init__(self, vae_model: BaseVAE, params: dict) -> None:
@@ -50,7 +50,7 @@ class VAEXperiment(pl.LightningModule):
 
         return val_loss
 
-    def validation_end(self, outputs):
+    def validation_epoch_end(self, outputs):
         avg_loss = torch.stack([x['loss'] for x in outputs]).mean()
         tensorboard_logs = {'avg_val_loss': avg_loss}
         self.sample_images()
