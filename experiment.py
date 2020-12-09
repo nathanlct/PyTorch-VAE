@@ -47,7 +47,6 @@ class VAEXperiment(pl.LightningModule):
                                             M_N = self.params['batch_size'] / self.num_val_imgs,
                                             optimizer_idx = optimizer_idx,
                                             batch_idx = batch_idx)
-
         return val_loss
 
     def validation_epoch_end(self, outputs):
@@ -62,14 +61,14 @@ class VAEXperiment(pl.LightningModule):
         recons = self.model.generate(test_input)
 
         vutils.save_image(recons.data,
-                          f"{self.logger.save_dir}{self.logger.name}/version_{self.logger.version}/"
+                          f"{self.logger.save_dir}/{self.logger.name}/version_{self.logger.version}/"
                           f"recons_{self.logger.name}_{self.current_epoch}.png",
                           normalize=True, nrow=12)
 
         try:
             samples = self.model.sample(144, self.curr_device)
             vutils.save_image(samples.cpu().data,
-                              f"{self.logger.save_dir}{self.logger.name}/version_{self.logger.version}/"
+                              f"{self.logger.save_dir}/{self.logger.name}/version_{self.logger.version}/"
                               f"{self.logger.name}_{self.current_epoch}.png",
                               normalize=True, nrow=12)
         except:
