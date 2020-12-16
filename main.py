@@ -40,7 +40,7 @@ parser.add_argument('--s3_path', type=str, default='adversarial/coinrun_vae', he
 args = parser.parse_args()
 
 # create save folder
-locale.setlocale(locale.LC_ALL, 'fr_FR')
+locale.setlocale(locale.LC_ALL, 'fr_FR.utf8')
 today = datetime.now().strftime("%d-%m-%Y")
 expname = args.expname.replace(' ', '_') + datetime.now().strftime("_%Hh%M")
 save_folder = os.path.join(args.save_folder, today, expname)
