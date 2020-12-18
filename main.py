@@ -185,4 +185,4 @@ writer.close()
 
 print(f'Saved at {save_folder}')
 if args.s3:
-    print(f'and at s3://{args.bucket}/{args.s3_path}')
+    print(f'and at s3://{args.s3_bucket}/{args.s3_path}')
