@@ -173,7 +173,7 @@ for epoch in range(args.epochs):
             'epoch': epoch,
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict()
-        }, os.path.join(save_folder, f"checkpoints/epoch_{epoch+1}.checkpoint"))
+        }, os.path.join(save_folder, f"checkpoints/epoch_{epoch}.checkpoint"))
 
         if args.s3:
             for path, subdirs, files in os.walk(save_folder):
@@ -185,4 +185,6 @@ writer.close()
 
 print(f'Saved at {save_folder}')
 if args.s3:
-    print(f'and at s3://{args.s3_bucket}/{args.s3_path}')
+    print(f'and at s3://{args.s3_bucket}/{args.s3_path}/{today}/{expname}')
+
+
