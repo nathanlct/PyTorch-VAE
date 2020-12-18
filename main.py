@@ -75,8 +75,8 @@ if args.seed:
     torch.backends.cudnn.benchmark = False  # can reduce performance
 
 # dataset
-train_dataset = CoinrunDataset('dataset/data.npz', split='train', force_size=1*args.batch_size)
-val_dataset = CoinrunDataset('dataset/data.npz', split='test', force_size=1*args.batch_size)
+train_dataset = CoinrunDataset('dataset/data.npz', split='train')
+val_dataset = CoinrunDataset('dataset/data.npz', split='test')
 
 num_workers = 0 if args.local else 4
 train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True,
