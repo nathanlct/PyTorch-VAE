@@ -13,7 +13,6 @@ pip install matplotlib
 pip install tensorflow
 pip install tensorboard
 pip install boto3
-pip install numpy
 export CUBLAS_WORKSPACE_CONFIG=:4096:8  # for deterministicity
 
 sudo apt-get install language-pack-fr
