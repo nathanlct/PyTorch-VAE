@@ -115,7 +115,7 @@ for epoch in range(args.epochs):
         print('.', end='', flush=True)
         optimizer.zero_grad()
 
-        results = model(batch)
+        results = model(batch.to(device))
         train_loss = model.loss_function(*results, M_N = args.batch_size / n_train)
         for k, v in train_loss.items():
             train_losses[k].append(v.item())
