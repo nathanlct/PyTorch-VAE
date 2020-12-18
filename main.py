@@ -112,12 +112,12 @@ for epoch in range(args.epochs):
     model.train()
     train_losses = defaultdict(list)
     for batch_idx, batch in enumerate(train_dataloader):
-        batch = batch.to(device)
-
         print('.', end='', flush=True)
+
+        data = batch.to(device)
         optimizer.zero_grad()
 
-        results = model(batch)
+        results = model(data)
         train_loss = model.loss_function(*results, M_N = args.batch_size / n_train)
         for k, v in train_loss.items():
             train_losses[k].append(v.item())
@@ -140,7 +140,8 @@ for epoch in range(args.epochs):
             for batch_idx, batch in enumerate(val_dataloader):
                 print('.', end='', flush=True)
 
-                results = model(batch)
+                data = batch.to(device)
+                results = model(data)
                 val_loss = model.loss_function(*results, M_N = args.batch_size / n_val)
                 for k, v in val_loss.items():
                     val_losses[k].append(v.item())
